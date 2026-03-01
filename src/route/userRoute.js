@@ -4,7 +4,7 @@ var {validate_token} = require('../middleware/auth');
 // var auth = require('../auth/middleware');
 const Users = (app)=>{
         
-    app.get('/api/user' ,validate_token(), GetUser);
+    app.get('/api/user' , GetUser);
     app.get('/api/user/:id' ,validate_token(), GetOne);
     app.post('/api/user' , Create);
     app.put('/api/user' ,validate_token(), Update);
@@ -19,3 +19,4 @@ const Users = (app)=>{
 
 
 module.exports = Users ;
+
