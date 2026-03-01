@@ -1,0 +1,2 @@
+[25/02/2026 21:17:57] Cannot destructure property 'id' of 'req.body' as it is undefined.
+[25/02/2026 21:18:43] Cannot destructure property 'user_id' of 'req.body' as it is undefined.

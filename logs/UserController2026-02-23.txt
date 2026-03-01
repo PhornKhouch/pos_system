@@ -1,0 +1,7 @@
+[23/02/2026 20:56:01] Validation error
+[23/02/2026 20:56:40] Validation error
+[23/02/2026 21:02:41] Validation error
+[23/02/2026 21:04:09] notNull Violation: tbl_user.user_id cannot be null
+[23/02/2026 21:05:09] notNull Violation: tbl_user.user_id cannot be null
+[23/02/2026 21:05:57] notNull Violation: tbl_user.user_id cannot be null
+[23/02/2026 21:06:13] notNull Violation: tbl_user.user_id cannot be null

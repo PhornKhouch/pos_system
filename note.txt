@@ -1,0 +1,62 @@
+-- Paramater 
+    - query   search , filter 
+        http:localhost:3000/api/student/create?id=1&&stuID=001
+    - params
+        - define key in route
+        - delete , getone
+    - body 
+        - {
+            key 1 ; value 1
+        }
+
+
+Homework 
+- create student API 
+    -Getlist
+    -create
+    -update
+    -delete
+
+
+-- cmd : npm install cors 
+
+- create Form using HTML Form 
+    - Get data from API 
+    - Handle data to backend (post data ) API: 
+    - delete data 
+    - update data 
+
+
+-add 
+     get data form  
+     save to backend
+     Display data
+
+
+
+Homework 
+    -select, Create , upate , delete for Product  
+    - screen scope work to group 
+
+
+Homework 
+    - Create Form For Frontend HTML CSS JS OR Boostrap 
+    - About staff Profile as attach file sample 
+    - Select , Create , update , Delete 
+    - Display data on table row 
+
+
+_ Step to Send Telegram Notification 
+    1- Create Telegram bot 
+        - Token : 7987957086:AAG1Isah5tuM--heK8-j1GBXQKqoCx2hH64
+        - GroupID : -1003485010428
+    2- install npm node-api-Telegram-bot
+    3- process 
+
+- Step to send email 
+    1- Create gmail & App password
+        host : stmp.gmail.com
+        password : o d h b j q g f z v a m p y x t
+        sender : pkhouch97@gmail.com
+    2- install nodemailer 
+    3- process 
