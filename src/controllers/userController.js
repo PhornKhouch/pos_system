@@ -121,7 +121,10 @@ const login = async (req, res) => {
         });
     }
     catch (error) {
-        logError("UserController", error, res);
+        res.json({
+            success: true,
+            message: error,
+        });
     }
 }
 
@@ -359,4 +362,5 @@ module.exports = {
     sendOTP,
     verifyOtp,
     resetPassword
+
 }
