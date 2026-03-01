@@ -115,7 +115,7 @@ const login = async (req, res) => {
         const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY, { expiresIn: '1h' });
         //result
         res.json({
-            success: true,
+            success: false,
             message: 'Login successful',
             token : token
         });
@@ -364,3 +364,4 @@ module.exports = {
     resetPassword
 
 }
+
