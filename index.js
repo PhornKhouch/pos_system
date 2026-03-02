@@ -11,6 +11,7 @@ const categoryRoute = require('./src/route/categoryRoute');
 const brandRoute = require('./src/route/brandRoute');
 const productRoute = require('./src/route/productRoute');
 const userRoutes = require('./src/route/userRoute');
+const posSaleRoute = require('./src/route/posSaleRoute');
 const app = express();
 
 // Middleware
@@ -24,6 +25,7 @@ userRoutes(app);
 categoryRoute(app);
 brandRoute(app);
 productRoute(app);
+posSaleRoute(app);
 
 const PORT = process.env.PORT || 3000;
 
