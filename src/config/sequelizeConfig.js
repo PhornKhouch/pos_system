@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 //production database configuration
 
 const sequelize = new Sequelize(
-  process.env.DATABASE_URL || 'mysql://root:IYgNjWfQnleWHZdUbxMbvYHaFypReXRU@mysql.railway.internal:3306/railway',
+  process.env.DATABASE_URL || 'mysql://root:sxuwtMBtxoCfPCGrDZoxXVpqnoiLhkWU@mysql.railway.internal:3306/railway',
   {
     dialect: 'mysql'
   }
@@ -22,3 +22,4 @@ const sequelize = new Sequelize(
 // );
 
 module.exports = sequelize;
+
