@@ -7,7 +7,7 @@ const migrate = async () => {
         console.log('✓ Database connection authenticated');
         
         // Sync all models with database
-        await sequelize.sync({ alter: false });
+        await sequelize.sync({ alter: true });
         console.log('✓ Database synchronized successfully');
         return true;
     } catch (error) {
