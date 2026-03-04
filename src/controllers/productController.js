@@ -5,7 +5,7 @@ const buildPhotoPath = (req, file) => {
     if (!file) {
         return null;
     }
-    return `/assets/upload/${file.filename}`;
+    return `assets/upload/${file.filename}`;
 };
 // GET all products or get by ID
 const get = async (req, res) => {
