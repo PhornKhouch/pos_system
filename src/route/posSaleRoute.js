@@ -1,5 +1,5 @@
 
-var {saleItem} = require('../controllers/posSaleController');
+var {saleItem} = require('../controllers/poSsaleController');
 var {validate_token} = require('../middleware/auth');
 // var auth = require('../auth/middleware');
 const Sale = (app)=>{
