@@ -29,7 +29,7 @@ userRoutes(app);
 categoryRoute(app);
 brandRoute(app);
 productRoute(app);
-posSaleRoute(app);
+//posSaleRoute(app);
 paymentMethodRoute(app);
 telegramConfigRoute(app);
 setAlertRoute(app);
@@ -57,6 +57,7 @@ const startServer = async () => {
 
 // Start the application
 startServer();
+
 
 
 
