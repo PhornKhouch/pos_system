@@ -9,6 +9,7 @@ const sequelize = new Sequelize(
   }
 );
 
+
 // Old localhost connection
 // const sequelize = new Sequelize(
 //   process.env.DB_NAME || 'backend_pos_db',
@@ -20,6 +21,5 @@ const sequelize = new Sequelize(
 //     dialect: process.env.DB_DIALECT || 'mysql'
 //   }
 // );
-
 
 module.exports = sequelize;

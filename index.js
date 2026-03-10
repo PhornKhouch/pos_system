@@ -15,6 +15,7 @@ const posSaleRoute = require('./src/route/posSaleRoute');
 const paymentMethodRoute = require('./src/route/paymentMethodRoute');
 const telegramConfigRoute = require('./src/route/telegramConfigRoute');
 const setAlertRoute = require('./src/route/setAlertRoute');
+const customerRoute = require('./src/route/customerRoute');
 const app = express();
 
 // Middleware
@@ -32,6 +33,7 @@ posSaleRoute(app);
 paymentMethodRoute(app);
 telegramConfigRoute(app);
 setAlertRoute(app);
+customerRoute(app);
 
 const PORT = process.env.PORT || 3000;
 
