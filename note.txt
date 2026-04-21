@@ -60,3 +60,10 @@ _ Step to Send Telegram Notification
         sender : pkhouch97@gmail.com
     2- install nodemailer 
     3- process 
+
+
+
+Homework 
+     - create sign up form 
+     - validation on feild (can be show text or alert messae )
+     - button handClick for signup

@@ -124,7 +124,7 @@ const create = async (req, res) => {
         });
     }
     catch (error) {
-        logError("ProductControlle", error, res);
+        logError("ProductController", error, res);
     }
 };
 
@@ -162,7 +162,7 @@ const update = async (req, res) => {
             telegram: telegram !== undefined ? telegram : product.telegram,
             status: status !== undefined ? status : product.status,
             remark: remark !== undefined ? remark : product.remark,
-            photo: uploadedPhoto !== undefined ? uploadedPhoto : product.photo
+            photo: req.file ? uploadedPhoto : product.photo
         });
 
         res.json({

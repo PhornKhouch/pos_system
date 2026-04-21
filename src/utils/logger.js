@@ -1,13 +1,12 @@
 const fs = require("fs/promises");
+const path = require("path");
 const moment = require("moment");
 
 const logError = async (controller,err,res) => {
     try {
-        
-
         const timestamp = moment().format("DD/MM/YYYY HH:mm:ss");
-        const folderPath = "./logs";
-        const filePath = `${folderPath}/${controller + moment().format("YYYY-MM-DD") }.txt`;
+        const folderPath = path.join(__dirname, "../../logs");
+        const filePath = path.join(folderPath, `${controller}${moment().format("YYYY-MM-DD")}.txt`);
         // Create "logs" folder if missing
         await fs.mkdir(folderPath, { recursive: true });
         const logMessage = `[${timestamp}] ${err.message}\n`;

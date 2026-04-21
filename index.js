@@ -16,6 +16,8 @@ const paymentMethodRoute = require('./src/route/paymentMethodRoute');
 const telegramConfigRoute = require('./src/route/telegramConfigRoute');
 const setAlertRoute = require('./src/route/setAlertRoute');
 const customerRoute = require('./src/route/customerRoute');
+const customerOrderRoute = require('./src/route/customerOrderRoute');
+const reportRoute = require('./src/route/reportRoute');
 const app = express();
 
 // Middleware
@@ -34,6 +36,8 @@ paymentMethodRoute(app);
 telegramConfigRoute(app);
 setAlertRoute(app);
 customerRoute(app);
+customerOrderRoute(app);
+reportRoute(app);
 
 const PORT = process.env.PORT || 3000;
 
@@ -57,10 +61,6 @@ const startServer = async () => {
 
 // Start the application
 startServer();
-
-
-
-
 
 
 

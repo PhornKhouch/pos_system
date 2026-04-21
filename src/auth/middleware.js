@@ -1,7 +1,6 @@
  const jwt = require("jsonwebtoken");
  const TOKEN_RESORUCE_SECRET = "SJDHFKJSDFjshsdhKJ%(*%#74y35";
 
-
 const validate_token = () => {
   return (req, res, next) => {
     var authorization = req.headers.authorization; // token from client
@@ -31,6 +30,5 @@ const validate_token = () => {
     }
   };
 };
-
 
 module.exports = {validate_token};
