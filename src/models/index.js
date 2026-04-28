@@ -6,6 +6,7 @@ const Category = require('./Category');
 const Customer = require('./Customer');
 const GeneralSetting = require('./GeneralSetting');
 const MasterProduct = require('./MasterProduct');
+const ProductDetail = require('./ProductDetail');
 const Order = require('./Order');
 const OrderItem = require('./OrderItem');
 const PaymentMethod = require('./PaymentMethod');
@@ -28,6 +29,9 @@ MasterProduct.belongsTo(Brand, { foreignKey: 'brand_id', targetKey: 'code' });
 MasterProduct.belongsTo(Category, { foreignKey: 'category_id', targetKey: 'code' });
 Category.hasMany(MasterProduct, { foreignKey: 'category_id', sourceKey: 'code' });
 
+// ProductDetail associations
+MasterProduct.hasMany(ProductDetail, { foreignKey: 'prd_id', sourceKey: 'prd_id', as: 'ProductDetails' });
+ProductDetail.belongsTo(MasterProduct, { foreignKey: 'prd_id', targetKey: 'prd_id', as: 'MasterProduct' });
 
 // Order associations
 Order.hasMany(OrderItem, { foreignKey: 'order_id', sourceKey: 'order_id' });
@@ -59,6 +63,7 @@ module.exports = {
   Customer,
   GeneralSetting,
   MasterProduct,
+  ProductDetail,
   Order,
   OrderItem,
   PaymentMethod,

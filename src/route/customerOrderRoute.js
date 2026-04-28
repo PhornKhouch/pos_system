@@ -33,19 +33,14 @@ const CustomerRoute = (app) => {
     app.delete('/api/customer/:id', deleteCustomer);
 
     // ================== CUSTOMER ORDERS (Frontend Checkout) ==================
-    // Place a new order (checkout) - supports both guest and logged-in customers
     app.post('/api/customer/order', placeOrder);
     
-    // Get all orders for logged-in customer
     app.get('/api/customer/orders', getOrders);
-    
-    // Get orders by email (for guest order tracking)
+
     app.get('/api/customer/orders/track', getOrderByEmail);
     
-    // Get specific order detail
     app.get('/api/customer/order/:order_id', getOrderDetail);
     
-    // Cancel an order (logged-in customer only)
     app.delete('/api/customer/order/:order_id', cancelOrder);
 };
 

@@ -1,4 +1,4 @@
-const { MasterProduct } = require('../models');
+const { MasterProduct, ProductDetail } = require('../models');
 const logError = require('../utils/logger');
 
 const buildPhotoPath = (req, file) => {
@@ -215,5 +215,118 @@ module.exports = {
     search,
     create,
     update,
-    deleteProduct
+    deleteProduct,
+    getDetail,
+    createDetail,
+    updateDetail,
+    deleteDetail
+}
+
+// GET product details (specs) by prd_id
+async function getDetail(req, res) {
+    try {
+        const { prd_id } = req.params;
+
+        const product = await MasterProduct.findByPk(prd_id, {
+            include: [{ model: ProductDetail, as: 'ProductDetails' }]
+        });
+
+        if (!product) {
+            return res.status(404).json({ success: false, message: 'Product not found' });
+        }
+
+        const details = (product.ProductDetails || []).map(d => ({
+            detail_id: d.detail_id,
+            long_des: d.long_des,
+            color: d.color,
+            spec: d.spec
+        }));
+
+        res.json({
+            success: true,
+            data: {
+                prd_id: product.prd_id,
+                prd_name: product.prd_name,
+                category_id: product.category_id,
+                brand_id: product.brand_id,
+                photo: product.photo,
+                status: product.status,
+                details
+            }
+        });
+    } catch (error) {
+        logError('ProductController - getDetail', error, res);
+    }
+}
+
+// CREATE product detail spec row(s)
+// Body: { prd_id, details: [{ section, spec_key, spec_value, sort_order }] }
+async function createDetail(req, res) {
+    try {
+        const { prd_id } = req.params;
+        const { details } = req.body;
+
+        if (!Array.isArray(details) || details.length === 0) {
+            return res.status(400).json({ success: false, message: 'details array is required' });
+        }
+
+        const product = await MasterProduct.findByPk(prd_id);
+        if (!product) {
+            return res.status(404).json({ success: false, message: 'Product not found' });
+        }
+
+        const rows = details.map(d => ({
+            prd_id,
+            long_des: d.long_des || null,
+            color: d.color || null,
+            spec: d.spec || null
+        }));
+
+        const created = await ProductDetail.bulkCreate(rows);
+
+        res.status(201).json({ success: true, message: 'Product details created', data: created });
+    } catch (error) {
+        logError('ProductController - createDetail', error, res);
+    }
+}
+
+// UPDATE a single product detail row
+// Body: { spec_key, spec_value, section, sort_order }
+async function updateDetail(req, res) {
+    try {
+        const { detail_id } = req.params;
+        const { long_des, color, spec } = req.body;
+
+        const detail = await ProductDetail.findByPk(detail_id);
+        if (!detail) {
+            return res.status(404).json({ success: false, message: 'Detail not found' });
+        }
+
+        await detail.update({
+            long_des: long_des !== undefined ? long_des : detail.long_des,
+            color: color !== undefined ? color : detail.color,
+            spec: spec !== undefined ? spec : detail.spec
+        });
+
+        res.json({ success: true, message: 'Product detail updated', data: detail });
+    } catch (error) {
+        logError('ProductController - updateDetail', error, res);
+    }
+}
+
+// DELETE a single product detail row by detail_id
+async function deleteDetail(req, res) {
+    try {
+        const { detail_id } = req.params;
+
+        const detail = await ProductDetail.findByPk(detail_id);
+        if (!detail) {
+            return res.status(404).json({ success: false, message: 'Detail not found' });
+        }
+
+        await detail.destroy();
+        res.json({ success: true, message: 'Product detail deleted' });
+    } catch (error) {
+        logError('ProductController - deleteDetail', error, res);
+    }
 }

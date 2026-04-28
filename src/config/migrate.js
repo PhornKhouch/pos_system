@@ -1,4 +1,4 @@
-const { sequelize, Brand, Category, Customer, GeneralSetting, MasterProduct, Order, OrderItem, PaymentMethod, Sale, SaleItemDetail, Setting, StoreInfor, Telegram, User } = require('../models');
+const { sequelize, Brand, Category, Customer, GeneralSetting, MasterProduct, ProductDetail, Order, OrderItem, PaymentMethod, Sale, SaleItemDetail, Setting, StoreInfor, Telegram, User } = require('../models');
 
 const migrate = async () => {
     try {
