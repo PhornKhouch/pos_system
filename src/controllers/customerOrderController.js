@@ -90,6 +90,15 @@ const placeOrder = async (req, res) => {
             });
         }
 
+        // Verify customer exists in DB before linking (avoids FK constraint failure)
+        let validCustomerId = null;
+        if (customer && customer.customer_id) {
+            const existingCustomer = await Customer.findByPk(customer.customer_id);
+            if (existingCustomer) {
+                validCustomerId = customer.customer_id;
+            }
+        }
+
         // Create order
         const order_id = generateOrderId();
         const order = await Order.create({
@@ -98,10 +107,10 @@ const placeOrder = async (req, res) => {
             fullname,
             adress,
             postalcode,
-            customer_id: customer ? customer.customer_id : null,
+            customer_id: validCustomerId,
             amount: totalAmount,
             status_payment: status_payment || 'ABA',
-            created_by: customer ? customer.customer_id : 'guest',
+            created_by: validCustomerId || 'guest',
             created_on: new Date()
         });
 
