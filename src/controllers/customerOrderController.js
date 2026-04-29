@@ -33,7 +33,11 @@ const generateOrderId = () => {
 // Place a new order (Checkout)
 const placeOrder = async (req, res) => {
     try {
+        console.log('=== placeOrder START ===');
+        console.log('[1] Request body:', JSON.stringify(req.body, null, 2));
+
         const customer = getCustomerFromToken(req);
+        console.log('[2] Decoded token customer:', customer);
         
         const { 
             email, 
@@ -64,7 +68,9 @@ const placeOrder = async (req, res) => {
         const validatedItems = [];
 
         for (const item of items) {
+            console.log(`[3] Looking up product prd_id: "${item.prd_id}"`);
             const product = await MasterProduct.findByPk(item.prd_id);
+            console.log(`[3] Product found:`, product ? `${product.prd_name} (qty: ${product.qty})` : 'NOT FOUND');
             
             if (!product) {
                 return res.status(400).json({
@@ -74,6 +80,7 @@ const placeOrder = async (req, res) => {
             }
 
             if (product.qty < item.qty) {
+                console.log(`[3] Insufficient stock: available ${product.qty}, requested ${item.qty}`);
                 return res.status(400).json({
                     success: false,
                     message: `Insufficient stock for product ${product.prd_name}. Available: ${product.qty}`
@@ -93,14 +100,19 @@ const placeOrder = async (req, res) => {
         // Verify customer exists in DB before linking (avoids FK constraint failure)
         let validCustomerId = null;
         if (customer && customer.customer_id) {
+            console.log(`[4] Verifying customer_id "${customer.customer_id}" exists in DB...`);
             const existingCustomer = await Customer.findByPk(customer.customer_id);
+            console.log(`[4] Customer found:`, existingCustomer ? existingCustomer.customer_id : 'NOT FOUND — will use null');
             if (existingCustomer) {
                 validCustomerId = customer.customer_id;
             }
+        } else {
+            console.log('[4] No token / no customer_id — guest order');
         }
 
         // Create order
         const order_id = generateOrderId();
+        console.log(`[5] Creating order: ${order_id}, customer_id: ${validCustomerId}, amount: ${totalAmount}`);
         const order = await Order.create({
             order_id,
             email,
@@ -138,8 +150,11 @@ const placeOrder = async (req, res) => {
                 status_payment
             }
         });
+        console.log('=== placeOrder SUCCESS ===');
 
     } catch (error) {
+        console.error('=== placeOrder ERROR ===', error.message);
+        console.error(error.stack);
         logError("customerOrderController - placeOrder", error, res);
     }
 };
