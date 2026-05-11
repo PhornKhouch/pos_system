@@ -18,10 +18,12 @@ const setAlertRoute = require('./src/route/setAlertRoute');
 const customerRoute = require('./src/route/customerRoute');
 const customerOrderRoute = require('./src/route/customerOrderRoute');
 const reportRoute = require('./src/route/reportRoute');
+const paywayRoute = require('./src/route/paywayRoute');
 const app = express();
 
 // Middleware
 app.use(cors());
+paywayRoute(app);
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));

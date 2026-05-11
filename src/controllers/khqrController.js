@@ -51,15 +51,21 @@ const checkPaymentStatus = async (req, res) => {
         // responseCode: 0 = Success, 1 = Failed
         
         if (response.data && response.data.responseCode === 0) {
+            const transactionData = response.data.data || {};
+
             return res.status(200).json({
                 success: true,
+                status: 'COMPLETED',
+                isCompleted: true,
                 data: {
-                    hash: response.data.data.hash,
-                    fromAccountId: response.data.data.fromAccountId,
-                    toAccountId: response.data.data.toAccountId,
-                    currency: response.data.data.currency,
-                    amount: response.data.data.amount,
-                    description: response.data.data.description,
+                    status: 'COMPLETED',
+                    isCompleted: true,
+                    hash: transactionData.hash,
+                    fromAccountId: transactionData.fromAccountId,
+                    toAccountId: transactionData.toAccountId,
+                    currency: transactionData.currency,
+                    amount: transactionData.amount,
+                    description: transactionData.description,
                 },
                 message: response.data.responseMessage || 'Transaction found successfully',
             });
@@ -68,6 +74,8 @@ const checkPaymentStatus = async (req, res) => {
         // responseCode: 1 = Failed
         return res.status(404).json({
             success: false,
+            status: 'PENDING',
+            isCompleted: false,
             message: response.data?.responseMessage || 'Transaction not found',
         });
 
