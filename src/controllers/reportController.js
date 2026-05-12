@@ -200,15 +200,15 @@ const getTopSellingProducts = async (req, res) => {
         const topProducts = await OrderItem.findAll({
             attributes: [
                 'prd_id',
-                [fn('SUM', col('qty')), 'totalQty'],
-                [fn('SUM', literal('qty * unit_price')), 'totalRevenue']
+                [fn('SUM', col('tbl_order_item.qty')), 'totalQty'],
+                [fn('SUM', literal('`tbl_order_item`.`qty` * `tbl_order_item`.`unit_price`')), 'totalRevenue']
             ],
             include: [{
                 model: MasterProduct,
                 attributes: ['prd_name', 'photo', 'unit_cost']
             }],
-            group: ['prd_id', 'tbl_master_product.prd_id', 'tbl_master_product.prd_name', 'tbl_master_product.photo', 'tbl_master_product.unit_cost'],
-            order: [[fn('SUM', col('qty')), 'DESC']],
+            group: ['tbl_order_item.prd_id', 'tbl_master_product.prd_id', 'tbl_master_product.prd_name', 'tbl_master_product.photo', 'tbl_master_product.unit_cost'],
+            order: [[fn('SUM', col('tbl_order_item.qty')), 'DESC']],
             limit: parseInt(limit)
         });
 
